@@ -1,0 +1,28 @@
+package movieinfo.resource;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import movieinfo.model.Movie;
+import movieinfo.model.Rating;
+
+@RestController
+@RequestMapping("movies/")
+public class Movieresource {
+
+	@RequestMapping("/{mid}")
+	public Movie getmovieinfo(@PathVariable String mid) {
+		
+		return new Movie(mid, "Tere Naam");
+	}
+	
+	@RequestMapping("rate/{rate}")
+	public Rating getmovierating(@PathVariable String rate) {
+		RestTemplate rt = new RestTemplate();
+		Rating ra=rt.getForObject("http://movie-rating-service/ratings/"+rate,Rating.class);
+		return ra;
+	}
+	
+}

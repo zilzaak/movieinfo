@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <script th:src="@{/js/angular1.8.2.js}"></script>
+    
+<script th:src="@{/js/jquery340.js}"></script>
+
+<link th:rel="stylesheet" th:href="@{/cs/bootstrap431.css}" />
+
+<script  th:src="@{/js/bootstrap431.js}" ></script>
+
+<script th:inline="javascript">
+var pres = /*[[${prescription}]]*/ 
+var test="";
+var c = 1;
+$(document).ready(function(){
+	
+	$('input[type="checkbox"]').change(function() {
+		  if ($(this).is(":checked")) {
+			  if(c<2){
+				  test=$(this).val();  
+				  c=c+2;
+			  }else{
+				  
+				  test=test+","+$(this).val();   
+			  }
+		 
+		    return;
+		  }
+		});
+	
+})
+
+
+
+	var today = new Date();
+	var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+	function init(){
+		
+		document.getElementById("date").innerHTML="আজকের তারিখঃ-"+ date;
+	}
+var selected=new Array(20);
+selected=["no","no","no","no","no","no","no","no","no","no","no","no","no","no","no","no"];
+
+var mod=angular.module("prescribeapp",[]);
+
+mod.controller("prescribe",function($scope,$http,$window){
+	$scope.prescription= pres;
+	
+	$scope.k="";
+	$scope.gl="";
+	$scope.finat=[{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},
+		{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "},{"name":" ","age":" "}]
+	
+
+	$scope.check=function(i){
+		var s = selected[i];
+		if(s=="no"){
+			
+			return true;
+		}
+		else{
+			
+			return  false;	
+		}
+		
+	}
+
+	$scope.sel=function(a){
+		var s = $scope.gl;
+		selected[s]="ok";
+		
+		$scope.prescription.druglist[s].drugname=$scope.finat[a].name;
+		
+	angular.forEach($scope.finat,function(v,i){
+			$scope.finat[i].name=" ";
+		})
+	
+	}
+
+	$scope.res=function(i){
+	
+	$scope.gl=i;
+		
+		var t = $scope.prescription.druglist[i].drugname;
+	    var r ={ "name":t,
+			"age":"fdd",
+	              }
+			
+		
+		$http({
+			method:"POST",
+			url: /*[[@{take/getchar}]]*/,
+			data: angular.toJson(r),
+			headers: {"Content-Type":"application/json"}}).
+			then(function(response){
+	         
+			  $scope.k=response.data;
+			  angular.forEach($scope.k.arrays,function(v,i){
+				  $scope.finat[i].name=v;
+				  $scope.finat[i].age=v;
+				 
+				 
+			           })
+	                             
+			         })   }
+	
+	
+$scope.ages=["১ দিন","২দিন","৩দিন","৪দিন","৫দিন","৬দিন","৭দিন","৮দিন","১০দিন","১১দিন","১২দিন","১৫দিন","২০দিন","২২দিন","২৪দিন","২৫দিন","২৬দিন","২৭দিন","১মাস","৩৫দিন",
+	"৪০দিন","১.৫মাস","২মাস","২.৫মাস","৩মাস","৫মাস","৬মাস","৭মাস","৮মাস","৯মাস","১০মাস","১১মাস","১বছর","২বছর","২.৫বছর","৩বছর","৩.৫বছর","৪বছর","৪.৫বছর",
+	"৫বছর","৬বছর","৭বছর","৮বছর","৯বছর","১০বছর","১১বছর","১২বছর","১৩বছর","১৪বছর","১৫বছর","১৬বছর","১৭বছর","১৮বছর","১৯বছর","২০বছর","২১বছর","২২বছর","২৩বছর","২৪বছর","২৫বছর",
+	"২৬বছর","২৭বছর","২৮বছর","২৯বছর","৩০বছর","৩১বছর","৩২বছর","৩৩বছর","৩৪বছর","৩৫বছর","৩৭বছর","৩৯বছর","৪১বছর","৪৩বছর","৪৫বছর",
+	"৪৬বছর","৪৭বছর","৪৮বছর","৪৯বছর","৫০বছর","৫২বছর","৫৫বছর","৬০বছর","৬৩বছর","৬৪বছর",
+	"৬৫বছর"
+	
+	]
+$scope.rules=["---","১-০-০","০-১-০","০-০-১","১ -০-১","১-১-০","০-১-১","১.৫-১.৫-০","১.৫-০-১.৫","০-১.৫-১.৫","১.৫-১.৫-১.৫",
+	"২-০-০","০-২-০","০-০-২","২-০-২","২-২-০","০-২-২","২.৫-০-০",
+	"০-০-২.৫","০-২.৫-০","২.৫-২.৫-০","২.৫-০-২.৫","০-২.৫-২.৫","২.৫-২.৫-২.৫","৩-০-০","০-০-৩","০-৩-০","৩-৩-০","০-৩-৩","৩-০-৩",
+	"৩-৩-৩"
+	]	
+$scope.days=["---","২ দিন","5দিন","7দিন","১০দিন","১২দিন","১৩দিন","১৫দিন","১৭দিন","২০দিন","২৫দিন","১মাস","৩৫দিন","৪০দিন","৪৫দিন","৫০দিন","২মাস","৩মাস","৪মাস","৫মাস"];
+$scope.add=function(){
+var arr = {
+		
+		"drugtype":" ","drugname":" ","rules":" ","days":" ","consult":" ","instruction":" "
+}
+$scope.prescription.druglist.push(arr);
+
+	}
+	
+	
+$scope.remove=function(){
+
+var length= $scope.prescription.druglist.length;
+var s = $scope.prescription.druglist[length-1];
+$scope.prescription.druglist.splice(length-1, 1); 
+
+	}
+	
+$scope.update=function(i){
+
+	$scope.prescription.druglist[i].drugtype=" ";	$scope.prescription.druglist[i].drugname=" ";
+	$scope.prescription.druglist[i].rules=" ";	$scope.prescription.druglist[i].days=" ";
+	$scope.prescription.druglist[i].consult=" ";	$scope.prescription.druglist[i].instruction=" ";
+selected[i]="no";
+	
+	
+	}	
+	
+$scope.sub=function(x){
+$scope.p = x;
+$scope.p.test=test;
+$http({
+	method:"POST",
+	url: /*[[@{/postprescription}]]*/,
+	data: angular.toJson($scope.p),
+	headers: {"Content-Type":"application/json"}}).
+	then(function(response){
+		
+		var w = response.data;
+		
+		alert("Successfully prescribed to"+response.data.name);
+		
+		$window.location.reload();
+		
+	})
+}	
+
+		
+ 
+
+})
+
+</script>
+
+</head>
+<body ng-controller="prescribe" ng-app="prescribeapp">
+
+<h1 style="margin-left:150px; color:burlywood;">দ্যা বিসমিল্লাহ ফার্মেসি,কসবা ,ব্রাহ্মমনবারিয়া</h1>
+<h id="date" style="color:burlywood;margin-left:700px;"> </h>
+<div style="margin-left:30px;margin-right:150px;" class="row">
+<div class="col"><table border="2">
+<th>রোগীর নাম</th> 
+<th>রোগীর বয়স</th>
+<th>সেক্স</th>
+
+<tr>
+<td><input type="text" ng-model="prescription.name"/></td>
+<td> <select  ng-options="a for a in ages"  ng-model="prescription.age">
+</select></td>
+<td><select  ng-model="prescription.sex">
+<option value="পুরুষ">পুরুষ</option>
+<option value="মহিলা">মহিলা</option> 
+</select></td>
+
+</tr>
+</table></div>
+
+<div class="col" ><h style="color:white;">উপদেশ::</h> <textarea   cols="80" style="width:300px;" ng-model="prescription.advice"></textarea></div>
+</div><br/>
+
+
+<div style="margin-left:50px;margin-right:280px;color:white;">পরিক্ষার নাম নির্বাচন -  
+<input type="checkbox" value="রক্ত পরিক্ষা">রক্ত পরিক্ষা</input>
+<input type="checkbox" value="মূত্র পরিক্ষা">মূত্র পরিক্ষা</input>
+<input type="checkbox" value="এক্সরে পরিক্ষা">এক্সরে পরিক্ষা</input>
+<input type="checkbox" value="ঈসিজি পরিক্ষা">ঈসিজি পরিক্ষা</input>
+<input type="checkbox" value="লিভার  পরিক্ষা">লিভার  পরিক্ষা</input>
+<input type="checkbox" value="হরমোন পরিক্ষা">হরমোন পরিক্ষা</input>
+<input type="checkbox" value="pregnency পরিক্ষা">pregnency পরিক্ষা</input> 
+<input type="checkbox" value="সিমেন পরিক্ষা">সিমেন পরিক্ষা</input>
+<input type="checkbox" value="উল্ট্রসনোপরিক্ষা পরিক্ষা">উল্ট্রসনোপরিক্ষা পরিক্ষা</input>
+<input type="checkbox" value="প্রয়োজন নাই ">প্রয়োজন নাই</input>
+</div>
+
+<table border="2" style="width:500px;margin-left:50px;">
+
+<th>ঔষধের ধরণ</th>
+<th>ঔষধের নাম</th>
+<th> নিয়ম</th>
+<th>খাওয়ার দিন</th>
+<th>শর্ত</th>
+<th>শতর্কতা/নির্দেশনা</th> 
+<th>আপডেট করুন</th>
+<tr ng-repeat="p in prescription.druglist">
+
+<td><select id="t"  ng-model="p.drugtype">
+<option value="ফাইল">ফাইল</option> 
+<option value="ট্যাবলেট">ট্যাবলেট</option> 
+<option value="ইঞ্জেকশান">ইঞ্জেকশান</option> 
+<option value="ডৌজ">ডৌজ</option>
+<option value="সেলাইন">সেলাইন</option> 
+<option value="কেনোলা">কেনোলা</option>  
+<option value="মলম">মলম</option> 
+<option value="ড্রপ">ড্রপ</option> 
+</select></td>
+
+
+
+<td ><input   ng-model="p.drugname" ng-keyup="res($index)"/>
+
+<div ng-if="check($index)">
+<ul ng-repeat="z in finat" >
+<p ng-click="sel($index)" style="color:red;">{{z.name}}</p></ul>
+</div>
+
+
+</td>
+
+<td><select  ng-options="a for a in rules" ng-model="p.rules">
+</select>
+</td>
+
+
+<td><select ng-options="c for c in days" ng-model="p.days">
+
+</select></td>
+<td><select ng-model="p.consult">
+<option value="খাওয়ার পরে">খাওয়ার পরে</option> 
+<option value="খাওয়ার  ১ ঘণ্টা পরে">খাওয়ার  ১ ঘণ্টা পরে</option>
+<option value="খাওয়ার  ২ ঘণ্টা পরে">খাওয়ার  ২ ঘণ্টা পরে</option>
+<option value="খাওয়ার  আগে">খাওয়ার  আগে</option>  
+<option value="খাওয়ার  ১ ঘণ্টা  আগে">খাওয়ার  ১ ঘণ্টা  আগে</option>
+<option value="খাওয়ার  ২ ঘণ্টা  আগে">খাওয়ার  ২ ঘণ্টা  আগে</option>
+<option value="৪ ঘণ্টা পর পর">৪ ঘণ্টা পর পর</option> 
+<option value="৬  ঘণ্টা পর পর">৬  ঘণ্টা পর পর</option>
+<option value="১২ ঘণ্টা পর পর">১২ ঘণ্টা পর পর</option> 
+<option value="২৪  ঘণ্টা পর পর"> ২৪ ঘণ্টা পর পর</option> 
+<option value="প্রতি ১ দিন বাদে">প্রতি ১ দিন বাদে</option> 
+<option value="প্রতি ২ দিন বাদে">প্রতি ২ দিন বাদে</option>
+<option value="দিনে  ২ বার ইঞ্জেকশান">দিনে  ২ বার ইঞ্জেকশান</option> 
+<option value="দিনে  ২ বার ইঞ্জেকশান">দিনে  ১  বার ইঞ্জেকশান</option>
+<option value="প্রয়োজন নাই">প্রয়োজন নাই</option>
+
+
+</select></td>
+<td><input type="text" ng-model="p.instruction"/></td>
+<td><button ng-click="update($index);"class="btn btn-primary">click</button></td>
+</tr>
+<br/>
+</table>
+<br/>
+<div class="row" style="margin-left:200px;width:680px;">
+<div class="col col-sm">
+<button style="width:150px;" class="btn btn-success" ng-click="sub(prescription)">submit</button>
+</div>
+<div class="col col-sm">
+<button style="width:150px;" class="btn btn-success" ng-click="add()">(+)add row</button>
+</div>
+<div class="col col-sm">
+<button style="width:150px;" class="btn btn-success" ng-click="remove()">(-)remove row</button>
+</div>
+</div>
+<br/>
+<div style="margin-left:50px;">
+<a th:href="@{/take/patientlist}" style="width:150px;" class="btn btn-success">Prescription</a>
+</div>
+
+</body>
+</html>

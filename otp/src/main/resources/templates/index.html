@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+    <link th:href="@{/theme/things.css}" rel="stylesheet"></link>
+    <!-- JS -->    
+    <script th:src="@{/theme/angular1.8.2.js}" type="text/javascript"></script>
+     <link rel="stylesheet" th:href="@{/theme/bootstrap431.css}" />
+    <script th:src="@{/theme/bootstrap431.js}" type="text/javascript"></script>
+    
+    <script>
+    
+    var mod=angular.module("regapp",[]);
+
+    mod.controller("regcon",function($scope,$http){
+    	
+    	
+    
+    	$scope.getin=function(){
+    		
+    		 $http({
+    				method:"POST", 
+    				url:"[[@{/prince}]]",
+    				data:angular.toJson($scope.mp),
+    				headers: {"Content-Type":"application/json"}
+    					}).then(function(response){
+
+alert('okkkkkkkkkkkkkkkkk');
+    		             	}) 
+    		
+    		
+                           	}
+   
+    	});
+    		
+    </script>
+</head>
+
+<body>
+
+
+<div  ng-app="regapp"   ng-controller="regcon">
+<input type="text" ng-model="mp.to" />
+<button class="btn btn-success btn-sm" ng-click="getin()">omar</button>
+
+
+</div>
+
+
+</body>
+</html>

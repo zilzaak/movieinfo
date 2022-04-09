@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="F:\pervez"/>
+		<item value="E:\pervez"/>
+		<item value="C:\Users\pc\Downloads\spring.sms\spring.sms"/>
+		<item value="C:\Users\pc\Desktop\demo (1)\pharma\pharma"/>
+		<item value="C:\Users\pc\Desktop\demo (1)\okk\okk"/>
+		<item value="C:\Users\pc\Downloads\uu"/>
+		<item value="C:\Users\pc\Downloads\forex (1)\forex"/>
+		<item value="C:\Users\pc\Downloads\forex"/>
+		<item value="C:\Users\pc\Desktop\microservice\forexservice"/>
+		<item value="C:\Users\pc\Desktop\demo (1)\demo"/>
+		<item value="F:\pervez\pervez"/>
+	</list>
+	<section name="SaveAsDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="385"/>
+		<item key="DIALOG_Y_ORIGIN" value="108"/>
+		<item key="DIALOG_WIDTH" value="525"/>
+		<item key="DIALOG_HEIGHT" value="580"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+	<section name="ExternalProjectImportWizard">
+	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="196"/>
+		<item key="DIALOG_Y_ORIGIN" value="183"/>
+	</section>
+</section>

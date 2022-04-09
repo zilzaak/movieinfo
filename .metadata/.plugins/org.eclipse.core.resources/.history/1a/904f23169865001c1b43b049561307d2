@@ -1,0 +1,270 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<title>sell animal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="<c:url value="/static/theme/bootstrap431.css" /> " rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="<c:url value="/static/theme/jquery340.js" />" > </script> 
+<script src="<c:url value="/static/theme/angular1.8.2.js" />" > </script>
+<script src="<c:url value="/static/theme/bootstrap431.js" />" > </script>
+
+<script>
+var module=angular.module("sellapp",[]);
+module.controller("sellcontrol",function($scope,$http){
+	
+
+		        	
+	        	
+})
+
+
+</script>
+
+<script>
+
+</script>
+
+
+<style>
+
+
+body{
+box-sizing:border-box;
+background-image:url("/static/theme/sea.jpg");
+background-size:1400px 500px;
+
+}
+.contain1{
+display:grid;
+grid-template-columns: 30% 30% 10%;
+column-gap:20px;
+padding-bottom:30px;
+}
+
+span:hover{
+color:red;
+background-color:skyblue;
+}
+table td:hover{
+background-color:silver; color:green;
+
+}
+
+input:hover{
+background-color:maroon; color:white;
+
+}
+
+table{
+overflow-x:scroll;
+}
+
+table th{
+wrap-word:break-word;
+background-color:black;
+color:white;
+padding:8px;
+}
+
+table td{
+wrap-word:break-word;
+background-color:white;
+color:black;
+text-align:center;
+}
+
+a:hover{
+background-color:steelblue;
+
+}
+
+
+.dropdown-menu a:hover{
+background-color:steelblue;
+
+}
+
+</style>
+
+</head>
+<body  ng-controller="sellcontrol"  ng-app="sellapp"  ng-init="inityear();">
+<%
+if(session.getAttribute("adminuser")==null && session.getAttribute("adminpass")==null){
+	response.sendRedirect("${pageContext.request.contextPath}"); 
+	}
+
+	  %>
+
+
+	
+
+<nav class="navbar navbar-expand-lg" style="margin-right:7%;margin-left:8%;margin-top:2%;border-radius:8px;background-color:darkslategrey;">
+  <a class="navbar-brand" href="#" style="margin-left:5%;color:maroon;background-color:orange;">দোকানের হিসাব খাতা </a>
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" style="color:white;"><b>click</b></span>
+  </button> 
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" style="margin-left:5%;color:white;" role="button" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          মাল অর্ডার
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" onclick="showdiv('1');">মাল এর  অর্ডার খাতাই  লিখুন</a>
+          <a class="dropdown-item" href="#" onclick="showdiv('2');">নির্দিষ্ট মাসের মোট অর্ডার দেখুন </a>
+          <a class="dropdown-item" href="#" onclick="showdiv('3');">আরও  অর্ডারের তথ্য খুজুন</a> 
+             </div>
+       </li>
+    
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" style="margin-left:5%;color:white;" role="button" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          মাল বিক্রি 
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" onclick="showdiv('4');">মাল বিক্রি খাতাই  লিখুন</a>
+          <a class="dropdown-item" href="#" onclick="showdiv('5');">নির্দিষ্ট মাসের  মোট বিক্রি দেখুন</a> 
+          <a class="dropdown-item" href="#" onclick="showdiv('6');">আরও  বিক্রির তথ্য খুজুন</a>
+      
+        </div>
+       </li>     
+      
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" style="margin-left:5%;color:white;" role="button" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         বিবিধ/অন্যান্য খরচ  
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" onclick="showdiv('7');">বিবিধ খরচ খাতায় লিখুন</a>
+          <a class="dropdown-item" href="#" onclick="showdiv('8');">নির্দিষ্ট মাসের  বিবিধ খরচ দেখুন</a>
+          <a class="dropdown-item" href="#" onclick="showdiv('9');">আরও  তথ্য খুজুন<a>
+ 
+          </div>
+       </li>    
+      
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" style="margin-left:5%;color:white;" role="button" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="showdiv('10');">
+          লাভ ক্ষতি 
+        </a>
+     </li>   
+       </ul>
+      </div>
+</nav>
+
+
+
+
+<div  style="margin-left:8%;background-color:darkseagreen;width:85%;display:none;font-size:0.80em;" id="1">
+<h4 style="margin-left:30%;color:white;">record between two date</h4>
+
+</div>
+
+
+
+<div  style="margin-left:8%;background-color:pink;width:85%;display:none;font-size:0.80em;padding:20px;" id="2">
+<h4 style="margin-left:30%;color:white;">records after a particular date</h4>
+
+
+
+
+</div>
+
+
+
+
+
+<div  style="margin-left:8%;background-color:darkcyan;width:85%;display:none;font-size:0.80em;padding:20px" id="3">
+
+<h5 style="margin-left:30%;color:white;">records before a particular date</h5>
+
+
+
+
+</div>
+
+
+
+
+
+<div  style="margin-left:8%;background-color:gray;width:85%;display:none;font-size:0.80em;padding:20px" id="4">
+
+<h4 style="margin-left:30%;color:white;">records by animal id</h4>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div  style="margin-left:8%;background-color:burlywood;width:85%;display:none;font-size:0.80em;" id="5">
+
+  <h4 style="text-align:center;color:white;">search by price</h4>
+
+
+
+
+</div>
+
+
+<div  style="margin-left:8%;background-color:lightblue;width:85%;display:none;font-size:0.80em;" id="6">
+
+
+
+
+
+</div>
+
+
+
+
+
+<div  style="margin-left:8%;background-color:brown;width:85%;display:none;font-size:0.80em;" id="7">
+<h2 style="text-align:center;color:white;background-color:black;padding:5px;">total animal sold and total price</h2>
+<button class="btn btn-sm btn-dark" ng-click="totalcost()" style="margin-left:50%;">click here</button> <br/>
+
+
+
+
+</div>
+
+
+
+<div  style="margin-left:8%;background-color:darkseagreen;width:85%;display:none;font-size:0.80em;padding-bottom:15px;" id="9">
+<br/>
+<h2 style="text-align:center;color:white;background-color:black;padding:5px;">selling's related to customer due</h2>
+<br/>
+
+
+
+</div>
+
+
+
+<div  style="margin-left:8%;background-color:darkseagreen;width:85%;display:none;font-size:0.80em;padding-bottom:15px;" id="10">
+
+
+
+</div>
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+TextOccurrenceIndicationInVerticalRuler=true
+bookmarkIndication=true
+bookmarkIndicationColor=255,255,255
+eclipse.preferences.version=1
+fullcoverage_stylePreferences=NONE
+fullcoverage_text=false
+nocoverage_stylePreferences=NONE
+nocoverage_text=false
+overrideIndicator=true
+overrideIndicatorInOverviewRuler=true
+overviewRuler_migration=migrated_3.1
+partialcoverage_stylePreferences=NONE
+partialcoverage_text=false

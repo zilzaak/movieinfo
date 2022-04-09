@@ -1,0 +1,97 @@
+@CHARSET "ISO-8859-1";
+h1{
+	
+	color:red;
+	border-bottom:1px solid black;
+}
+ul.a{
+	
+	list-style-type:square;
+}
+
+.testc{
+background-color:white;
+
+background-image:url("medicine2.jpg");	
+}
+
+.testc1{
+background-color:green;	
+border-right:400px;
+margin-right:700px;
+}
+.picd{
+
+	height:1000px;
+	
+background-color:black;	
+background-image:url("hos3.jpg");
+}
+body{
+background-image:url("background3.jpg");
+
+}
+
+#titleid{
+
+
+background-image:url("background3.jpg");
+}
+
+
+.img5{
+	width:750px;
+		height:400px;
+	image-resolution:600pi;
+}
+
+
+#slider_image{
+
+	position:relative;
+
+}
+
+
+.bdonation{
+	height:200px;
+	width:50%;
+	background-image:url("donate.jpg");
+	
+}
+.hinfo{
+height:200px;
+	width:50%;
+	background-image:url("lab.jpg");
+	
+}	
+	
+.findjob{
+	height:200px;
+	width:50%;
+	background-image:url("findjob.jpg");
+	
+	}
+	
+
+
+.findblood{
+
+	background-image:url("donate.jpg");
+	
+}	
+	
+img{
+width:50%;
+height:50%;
+
+}
+
+.plogo{
+width:200px;
+height:100px;
+
+}
+
+
+

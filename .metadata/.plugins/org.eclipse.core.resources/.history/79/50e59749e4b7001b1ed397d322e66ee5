@@ -1,0 +1,37 @@
+@charset "ISO-8859-1";
+
+.bd{
+
+	background:url("ncamp7.jpg");
+	background-size:700px 700px;
+}
+
+
+.bd2{
+
+	background:url("ncamp7.jpg");
+	background-size:700px 700px;
+}
+
+#login{
+	
+background-color:azure;	
+	
+}		
+
+#dlog{
+
+	background:url("ncamp7.jpg");
+	background-size:700px 700px;
+}
+#slog{
+
+	background:url("ncamp7.jpg");
+	background-size:700px 700px;
+}
+
+#bdo{
+
+	background:url("background3.jpg");
+	background-size:700px 700px;
+}

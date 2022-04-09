@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>homre page</title>
+ <link th:rel="stylesheet" th:href="@{/cs/bootstrap431.css}" />
+<script  th:src="@{/js/bootstrap431.js}" ></script>
+ <script th:src="@{/js/angular1.8.2.js}"></script>
+ <script th:src="@{/js/jquery340.js}"></script>
+
+
+
+<script th:inline="javascript">
+var alst=/*[[${listanimal}]]*/
+var i=1900; 
+
+var mod = angular.module("myapp",[]);
+
+mod.controller("mycon",function($scope,$http){
+	
+$scope.animalform=alst;
+	$scope.years=[];
+	$scope.ds=[];
+	$scope.ms=[];
+	$scope.ys=[];
+	$scope.days=['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26',
+		'27','28','29','30','31'];
+	
+	$scope.mfi=['01','02','03','04','05','06','07','08','09','10','11','12'];
+	$scope.brown=[]; 
+	$scope.black=[]; 
+	$scope.gray=[];
+	$scope.white=[];
+	
+	$scope.inityear=function(){
+		
+		for(var k=i;k<=3000;k++){
+			
+			$scope.years.push(k);
+	
+			
+		}
+		
+	
+		for(var k=0;k<=200;k++){
+	
+			$scope.brown[k]="";
+			$scope.black[k]=""; 
+			$scope.gray[k]="";
+			$scope.white[k]="";
+			
+			
+		}		
+		
+		
+		
+	}
+	
+	
+
+	
+	$scope.sdate=function(i){
+		
+		
+	$scope.animalform[i].stringbdate=$scope.ms[i]+"/"+$scope.ds[i]+"/"+$scope.ys[i];
+
+		
+	}
+	
+	
+$scope.addrowani=function(){
+	
+	var x={
+			"gender":"", "type":"","color":"","chest":"","chu":"","height":"","hu":"","weight":"","wu":"","stringbdate":"","extra":""		
+					
+		  }
+	
+	$scope.animalform.push(x);
+	
+}
+
+
+
+$scope.removerowani=function(){
+	var length=$scope.animalform.length;
+	$scope.animalform.splice(length-1, 1); 
+	
+}
+
+
+
+$scope.choosecolor=function(i,v){
+	
+if(v=='brown'){
+if($scope.brown[i]==""){
+	
+	$scope.brown[i]='brown';
+}	
+
+else{
+	$scope.brown[i]="";
+}
+	
+
+}
+
+
+
+if(v=='black'){
+	if($scope.black[i]==""){
+		
+		$scope.black[i]='black';
+	}	
+
+	else{
+		$scope.black[i]="";
+	}
+	
+}
+
+
+
+
+if(v=='gray'){
+	if($scope.gray[i]==""){
+		
+		$scope.gray[i]='gray';
+	}	
+
+	else{
+		$scope.gray[i]="";
+	}	
+	
+}
+
+if(v=='white'){
+	if($scope.white[i]==""){
+		
+		$scope.white[i]='gray';
+	}	
+
+	else{
+		$scope.white[i]="";
+	}	
+	
+}
+
+	
+	
+}
+
+
+
+$scope.manage=function(){
+	
+angular.forEach($scope.animalform,function(v,i){
+	
+	v.color=$scope.brown[i]+","+$scope.black[i]+","+$scope.gray[i]+","+$scope.white[i];
+
+})	
+	
+}
+
+
+$scope.photoupload=function(){
+
+	$http({
+		method:"GET",
+		url:/*[[@{animal/unphoto}]]*/,
+		headers: {"Content-Type":"application/json"}}).
+		then(function(response){
+	$scope.unphoto=response.data;
+		
+		document.getElementById("photoupload").click();
+		
+		        })
+	
+}
+
+
+$scope.addanimal=function(){
+$scope.manage();
+			
+		$http({
+			method:"POST",
+			url:/*[[@{animal/add}]]*/,
+			data: angular.toJson($scope.animalform),
+			headers: {"Content-Type":"application/json"}}).
+			then(function(response){
+			alert('suuccessful');
+				$scope.photoupload();
+	
+			
+			        })	
+	
+	
+}	
+
+	
+
+
+
+$scope.getallanimal=function(){
+	
+	
+	
+}
+
+	
+	
+	
+	
+	
+	
+})
+
+document.addEventListener("DOMContentLoaded", function(){
+  document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+    
+    element.addEventListener('click', function (e) {
+
+      let nextEl = element.nextElementSibling;
+      let parentEl  = element.parentElement;	
+
+        if(nextEl) {
+            e.preventDefault();	
+            let mycollapse = new bootstrap.Collapse(nextEl);
+            
+            if(nextEl.classList.contains('show')){
+              mycollapse.hide();
+            } else {
+                mycollapse.show();
+                // find other submenus with class=show
+                var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                // if it exists, then close all of them
+                if(opened_submenu){
+                  new bootstrap.Collapse(opened_submenu);
+                }
+            }
+        }
+    }); // addEventListener
+  }) // forEach
+});
+
+
+
+function addit(){
+
+	$('#dis').append($('#addiv'));	
+
+	document.getElementById("addiv").style.display="inline";
+		
+	           }
+	                  
+	   
+function allanimal(){
+	
+	document.getElementById("addiv").style.display="none";
+	$('#dis').append($('#allanimal'));	
+	
+	
+}
+
+
+	                 
+	                 </script>
+
+<style>
+
+.sidebar li .submenu{ 
+	list-style: none; 
+	margin: 0; 
+	padding: 0; 
+	padding-left: 0%;
+	padding-right: 0%;
+
+}
+
+.sidebar li .submenu a{ 
+color:green;
+paddinh:0%;
+margin:0%;
+}
+
+.sidebar li .nav-link{ 
+padding:2px;
+color:white;
+
+margin:0%;
+
+}
+
+
+.sidebar li .nav-link:hover{ 
+background-color:skyblue;
+color:black;
+
+}
+
+
+
+.nav-item .submenu li a:hover{
+background-color:black;
+color:white;
+}
+
+.nav-item{
+background-color:steelblue;
+paddinh:0%;
+margin:0%;
+}
+
+.container{
+margin:2%;
+background-color:skyblue;
+border:1px solid black;
+padding:1% 0%;
+padding-top:0%;
+display:inline;
+}
+
+
+
+.grid-contain{
+display:grid;
+grid-template-columns: 80% 20%;
+
+}
+
+
+.grid-contain:hover{
+ filter: blur(0.5px);
+
+}
+
+.grid-contain div{
+background-color:darkslategrey;
+padding:10px;
+color:white;
+word-wrap: break-word;
+display:inline;
+}
+
+
+.grid-contain2{
+display:grid;
+grid-template-columns: 20% 80%;
+
+}
+
+#arf{
+display:grid;
+width:25%;
+color:white;
+background-color:lightgray;
+grid-template-columns: 50% 50%;
+margin-left:3%;
+}
+
+#arf div{
+word-wrap: break-word;
+margin:0;
+background-color:white;
+}
+
+
+#arf div button:hover{
+color:white;
+background-color:lightseagreen;
+}
+
+
+.grid-contain2 .dv1{
+margin:0%;
+margin-top:0%;
+padding:0%;
+}
+
+.grid-contain2 div{
+background-color:skyblue;
+padding:10px;
+color:white;
+word-wrap: break-word;
+display:inline
+}
+
+
+table{
+margin:2%;
+overflow-x:scroll;
+}
+
+table th{
+background-color:black;
+color:white;
+}
+
+table td{
+background-color:ghostwhite;
+color:black;
+}
+
+
+
+input:hover{
+background-color:gold;
+}
+
+
+h:hover {
+  color:red;
+  text-shadow:1px 1px;
+}
+
+
+#im{
+height:50px;;
+width:150px;
+}
+
+
+
+
+</style>
+
+</head>
+
+<body ng-app="myapp" ng-controller="mycon"     th:if="${session.adminuser!=null &&  session.adminpass!=null}">
+
+<div class="container" ng-init="inityear()">
+
+<div class="grid-contain">
+<div>
+<span><img id="im" th:src="@{/images/cow.jpg}"/>
+<h>your dairy firm , dream is here...</h></span>
+</div>
+<div style="text-align:right;">
+<form th:action="@{logout}" th:method="post">
+ <button class="btn btn-sm btn-success" type="submit">logout</button>
+</form>
+</div>
+
+</div>
+<div class="grid-contain2">
+
+
+<div class="dv1">
+<nav class="sidebar card py-2 mb-4" style="display:inline;float:left;background-color:steelblue;">
+<ul class="nav flex-column" id="nav_accordion">
+
+	<li class="nav-item has-submenu">
+		<a class="nav-link" href="#"> Store animal</a>
+		<ul class="submenu collapse" style="background-color:white;">
+			<li><a class="nav-link" href="#" onclick="addit()">add animal</a></li>
+			<li><a class="nav-link" href="#" ng-click="photoupload()">all animals</a></li>
+			<li><a class="nav-link" href="#">all prescription</a> </li>
+		</ul>
+	</li>
+	
+	<li class="nav-item has-submenu">
+		<a class="nav-link" href="#">provide drug</a>
+		<ul class="submenu collapse" style="background-color:white;">
+			<li><a class="nav-link" href="#">provided drug</a></li>
+			<li><a class="nav-link" href="#">unprovided drug</a></li>
+			<li><a class="nav-link" href="#">search by age</a></li>
+			<li><a class="nav-link" href="#">search by type</a></li>
+		</ul>
+	</li>
+	
+	<li class="nav-item">
+		<a class="nav-link" href="#">settings</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="#"> Other link </a>
+	</li>
+</ul>
+
+</nav>
+</div>
+<div class="row" id="dis" style="margin-right:2px;overflow-x:auto;">
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+<!-- --add animal list -->
+
+
+
+
+
+
+
+<div id="addiv" style="font-size:0.80em;margin-right:7%;display:none;">
+
+<div id="arf">
+<div><button class="btn btn-sm" ng-click="addrowani()">add field</button></div>
+<div><button class="btn btn-sm" ng-click="removerowani()">remove field</button></div>
+</div>
+
+<table border="1" >
+  <tr>
+<th>gender</th>
+<th>type</th>
+<th>color</th>
+<th>chest</th>
+<th>height</th>
+<th>weight</th>
+<th>birth day</th>
+<th>birth month</th>
+<th>birth year</th>
+<th>extra identity</th>
+  </tr>
+  <tr ng-repeat="animal in animalform">
+  <td>
+  <select ng-model="animal.gender">
+  <option value="male">male</option>
+   <option value="female">female</option>
+  </select>
+  </td>
+      <td><select ng-model="animal.type">
+      <option value="cow">গরু</option>
+     <option value="goat">ছাগল</option>
+      <option value="calf">বাছুর</option>
+      </select></td>
+      
+      <td style="height:20px;overflow:hidden;background-color:cornsilk;">
+      <input type="checkbox"   ng-click="choosecolor($index,'brown')"><div style="background-color:brown;"></div>
+</input>
+      <input type="checkbox"    ng-click="choosecolor($index,'gray')"><div style="background-color:gray;"></div>
+</input>
+      <input type="checkbox"   ng-click="choosecolor($index,'black')"><div style="background-color:black;"></div>
+</input>
+
+      <input type="checkbox"   ng-click="choosecolor($index,'white')"><div style="background-color:white;border:1px solid green;"></div>
+</input>
+
+ </td>
+     
+   <td> 
+      <input style="width:50px;"  type="number" ng-model="animal.chest" />
+      <select ng-model="animal.chu">
+<option value="cm">cm</option>
+<option value="inch">inch</option>
+<option value="feet">feet</option>
+      </select>
+      </td>
+       <td>
+      <input  style="width:50px;"  type="number" ng-model="animal.height" />
+            <select ng-model="animal.hu">
+<option value="cm">cm</option>
+<option value="inch">inch</option>
+<option value="feet">feet</option>
+      </select>
+      </td>
+       <td>
+      <input style="width:50px;"  type="number" ng-model="animal.weight" />
+            <select ng-model="animal.wu">
+<option value="gm">gm</option>
+<option value="kg">kg</option>
+<option value="quintal">quintal</option>
+      </select>
+      </td>
+       <td>
+       
+<select ng-options="c for c in days" ng-model="ds[$index]"/>
+     </td>
+            <td>
+
+<select ng-options="c for c in mfi" ng-model="ms[$index]"/>
+     </td>
+      <td>
+      <select ng-options="c for c in years" ng-model="ys[$index]" ng-change="sdate($index)"/>
+      
+      </td>
+      
+      <td>
+<textarea rows="3" cols="10" ng-model="animal.extra"></textarea> 
+      </td>
+    </tr>
+
+</table>
+<button class="btn btn-sm btn-success" ng-click="addanimal()">submit</button>
+</div>
+
+
+
+
+
+
+
+<!-- all animal -->
+<button id="btnallanimal" style="display:none;" ng-click="getallanimal()">gghfhfgh</button>
+
+<div id="allanimal">
+
+
+
+
+</div>
+
+<button   class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" id="photoupload"></button>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:80%;">
+ <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header" style="background-color:gray;">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      
+<div class="modal-body">
+  <table>
+  <tr>
+  <th>created</th>
+  <th>type</th>
+   <th>color</th>
+    <th>weight</th>
+     <th>height</th>
+     <th>dateofbirth</th>
+     <th>image</th>
+     <th>upload</th>
+  </tr>
+  <tr ng-repeat="x in unphoto">
+    <td style="wrap-word:break-wordl;">{{x.createdstring}}</td>
+  <td>{{x.type}}</td>
+    <td>{{x.color}}</td>
+      <td>{{x.weight}}</td>
+        <td>{{x.height}}</td>
+        <td>{{x.stringbdate}}</td>
+        <td><img  th:src="@{{{x.filename}}}"></td>
+
+      <td>
+     <a th:href="@{/animal/photoid/{{x.anid}}}">upload</a>
+      </td>    
+  </tr>
+  </table>    
+
+</div>
+ </div>
+    
+  <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>homre page</title>
+ <script th:src="@{js/angular1.8.2.js}"></script>
+ <link th:rel="stylesheet" th:href="@{cs/jquery-ui.css}" /> 
+ <script th:src="@{js/jquery340.js}"></script>
+ <script th:src="@{js/jquery-ui.js}"></script> 
+<link th:rel="stylesheet" th:href="@{cs/bootstrap431.css}" />
+<script  th:src="@{js/bootstrap431.js}" ></script>
+<body>
+
+<form th:action="@{/animal/finalupload}" th:method="post" enctype="multipart/form-data">
+<input type="file" name="file"/>
+<button type="submit">upload</button>
+</form>
+</body>
+</html>
